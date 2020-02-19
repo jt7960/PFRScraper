@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup as bs
 import re
 import pyodbc
+import pandas
 
 ##DATABASE CONNECTION##
 #1 establish connection to the database
