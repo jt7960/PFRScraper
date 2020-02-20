@@ -34,9 +34,11 @@ r = requests.get(f'https://www.pro-football-reference.com/years/{season}/week_{w
 page = bs(r.text, 'html.parser')
 #print(page)
 
-for link in page.find_all(href=re.compile(f"boxscores/{season}")):
-    print(link)
+#for link in page.find_all(href=re.compile(f"boxscores/{season}")):
+#    print(link)
 
+for link in page.find_all(href.text='Final'):
+    print(link)
 
 
 
