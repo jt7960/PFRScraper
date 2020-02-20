@@ -12,9 +12,11 @@ cnxn = pyodbc.connect('DSN=NFLStats;') # This requires valid database connection
 crsr = cnxn.cursor()
 
 ##SCRAPE##
+#Base URL
+baseURL = 'https://pro-football-reference.com' #trailing / left off because href text is returning it to start the string
 ##Scrape Team Names##
 alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-r = requests.get('https://pro-football-reference.com/teams/')
+r = requests.get(f'{baseURL}teams/')
 page = bs(r.text, 'html.parser')\
 
 team_dict = {}
@@ -30,15 +32,11 @@ for link in page.find_all('a', attrs={'href': re.compile("^/teams/")}):
 season = '2019' 
 week = '1'
 
-r = requests.get(f'https://www.pro-football-reference.com/years/{season}/week_{week}.htm')
+r = requests.get(f'{baseURL}/years/{season}/week_{week}.htm')
 page = bs(r.text, 'html.parser')
-#print(page)
 
-#for link in page.find_all(href=re.compile(f"boxscores/{season}")):
-#    print(link)
-
-for link in page.find_all(href.text='Final'):
-    print(link)
+for link in page.find_all(href=re.compile(f"/boxscores/{season}")):
+    print(link.get('href'))
 
 
 
