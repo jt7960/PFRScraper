@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup as bs
 import re
 import pyodbc
-import pandas
+import pandas as pd
 
 ##DATABASE CONNECTION##
 #1 establish connection to the database
@@ -34,9 +34,9 @@ r = requests.get(f'https://www.pro-football-reference.com/years/{season}/week_{w
 page = bs(r.text, 'html.parser')
 #print(page)
 
-links = page.find_all(href=re.compile(re.compile("^/boxscore")))
-for link in links:
-    print(link['href'])
+for link in page.find_all(href=re.compile(f"boxscores/{season}")):
+    print(link)
+
 
 
 
